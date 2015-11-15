@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+	<head>
+		<style>
+			html, body{
+				margin: 0;
+				padding: 0;
+			}
+			#ad-container{
+				padding: 7px;
+			}
+			.layout{
+				position: relative;
+			}
+			.qtr{
+				height: 100%;
+			}
+			.qtr-left{
+				float: left;
+			}
+			.qtr-right{
+				float: right;
+			}
+			img, video, embed{
+				width: 100%;
+				height: 100%;
+			}
+			img.qrcode{
+				position: absolute;;
+				width: 85px;
+				height: 85px;
+				bottom: 0;
+				right: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="ad-container">
+			<div class="half layout" data-layout="half" style="margin-bottom: 7px;">
+				<img src="/ad/ad-img/half.png" />
+				<img src="/ad/ad-img/half-href.png" class="qrcode" id="a"/>
+			</div>
+			<div class="half">
+				<div class="qtr qtr-left layout" data-layout="qtr-left">
+					<img src="/ad/ad-img/qtr-left.png" />
+					<img src="/ad/ad-img/qtr-left-href.png" class="qrcode" />
+				<!--
+					<embed src="http://www.iqiyi.com/common/flashplayer/20150902/shouyejumu1004x410dianshiugodi2bo-100k+.swf" width="100%" height="100%"></embed>
+					<video src="images/x.mp4" autoplay width="100%" height="100%"></video>
+				-->
+				</div>
+				<div class="qtr qtr-right layout" data-layout="qtr-right">
+					<img src="/ad/ad-img/qtr-right.png" />
+					<img src="/ad/ad-img/qtr-right-href.png" class="qrcode" />
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script src="/ad/assets/js/jquery-2.1.3.js"></script>
+<script>
+	var padding = 7;
+	var $half = $('.half');
+	var $qtr = $('.qtr');
+	$(window).load(init).resize(layout);
+	
+	function init(){
+		layout();
+		qrcode();
+	};
+	//页面元素大小
+	function layout(){
+		$half.height(($(window).height() - padding * 2 - padding)/ 2);
+		$qtr.width($half.width() / 2 - padding / 2);
+	};
+	//二维码的显示
+	function qrcode(){
+		/* //当图片不存在时, 不知为何不触发 error 事件
+		$('img.qrcode').error(function(){});
+		 */
+		$('img.qrcode').each(function(){
+			!this.complete || (typeof this.naturalWidth != 'undefined' && this.naturalWidth == 0) ? $(this).hide() : !0;
+		});
+	};
+</script>

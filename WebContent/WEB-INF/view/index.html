@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>广告上传 - 山西点付生活科技有限公司</title>
+<link href="/ad/assets/css/index.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+	<div class="container">
+		<form action="/ad/file" name="ad-files" enctype="multipart/form-data" method="POST" style="text-align: center;">
+			<!-- 
+			<div class="row-border">
+				<label>请选择<span class="text-small text-red">[jpg/png]</span>图片 / <span class="text-small text-red">[mp4/ogg]</span>视频 / Flash文件上传: 
+					<input type="file" />
+				</label>
+			</div>
+			-->
+			<div class="layout-container">
+				<div class="layout-item layout-half layout-space-bottom">
+					<input type="file" name="half" class="input-file" title="点击更换资源, 限JPG、PNG" accept=".jpg, .png"/>
+					<label class="input-file-text">资源链接&gt;&gt;http://<input type="text" name="half-href"/></label>
+					<img src="/ad/ad-img/half.png">
+				</div>
+				<div class="layout-half layout-space-top">
+					<div class="layout-item layout-qtr layout-left ">
+						<input type="file" name="qtr-left" class="input-file" title="点击更换资源, 限JPG、PNG" accept=".jpg, .png" />
+						<label class="input-file-text">资源链接&gt;&gt;http://<input type="text" name="qtr-left-href"/></label>
+						<img src="/ad/ad-img/qtr-left.png"/>
+					</div>
+					<div class="layout-item layout-qtr layout-right layout-space-left">
+						<input type="file" name="qtr-right" class="input-file" title="点击更换资源, 限JPG、PNG" accept=".jpg, .png"/>
+						<label class="input-file-text">资源链接&gt;&gt;http://<input type="text" name="qtr-right-href"/></label>
+						<img src="/ad/ad-img/qtr-right.png"/>
+					</div>
+				</div>
+			</div>
+			
+			<input type="submit" style="margin-top: 15px;" class="button" value="保存"/>
+		</form>
+		
+		<div style="margin-top: 10px;">
+			说明: <span class="text-tip">选择布局中相应位置以上传资源, 本功能仅供设置广告展示资料.</span>
+		</div>
+	</div>
+</body>
+</html>
+<<script src="/ad/assets/js/jquery-2.1.3.js"></script>
+<script src="/ad/assets/js/index.js"></script>

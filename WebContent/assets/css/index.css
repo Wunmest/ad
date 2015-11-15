@@ -1,0 +1,101 @@
+body{
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+}
+.container{
+	padding: 7px;
+	font-family: "华文细黑";
+}
+.text-small{
+	font-size: small;
+}
+.text-orange{
+	color: orange;
+}
+.text-red{
+	color: red;
+}
+.row-border{
+	padding: 5px;
+	border: dotted 1px gray;
+}
+.text-tip{
+	color: gray;
+}
+/* 显示比例 1: 4 */
+.layout-container{
+	width: 515px;
+	height: 384px;
+	margin: 0 auto;
+	border: dotted 1px gray;
+	padding: 4px;
+}
+.layout-item{
+	position: relative;
+	background-color: #9BDCF2;	
+}
+.layout-space-top{
+	margin-top: 2px;
+}
+.layout-space-bottom{
+	margin-bottom: 2px;
+}
+.layout-space-left{
+	margin-left: 2px;
+}
+.layout-space-right{
+	margin-right: 2px;
+}
+.layout-half{
+	height: 50%;
+}
+.layout-qtr{
+	width: 50%;
+	height: 100%; /* ? 为什么需要设置 100%, 否则会溢出 container */
+}
+.layout-left{
+	float: left;
+}
+.layout-right{
+	float: right;
+}
+.layout-container img{
+	width: 100%;
+	height: 100%;
+}
+
+/** 透明化上传文件按钮 */
+.input-file{
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 2;
+	opacity: 0;
+	cursor: pointer;
+}
+.input-text{
+	border-radius: 3px;
+}
+.input-file-text{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	color: rgb(255, 255, 255);
+	z-index: 3;
+}
+.button{
+	width: 60px;
+	height: 30px;
+	background-color: #4d90fe;
+	border: 1px solid #3079ed;
+	border-radius: 5px;
+	color: #fff;
+}
+.button:focus{
+	border: solid 1px rgba(0,0,0,0);
+	box-shadow: 0 0 0 2px #fff inset;
+	outline: 0 none rgba(0,0,0,0);
+}

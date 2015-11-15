@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"  
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:mvc="http://www.springframework.org/schema/mvc"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    					http://www.springframework.org/schema/beans/spring-beans-4.0.xsd   
+                        http://www.springframework.org/schema/context 
+                        http://www.springframework.org/schema/context/spring-context-4.0.xsd  
+                        http://www.springframework.org/schema/mvc   
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd"  
+    default-lazy-init="true">
+	<mvc:annotation-driven></mvc:annotation-driven>
+	<context:component-scan base-package="com.ad.web"></context:component-scan>
+	<!-- 
+	当 Web 请求到达 DispatcherServlet 并等待处理的时候
+	DispatcherServlet 首先会检查能否从 WebApplicationContext 中
+	找到一个名称为 multipartResolver(由 DispatcherServlet 的常量 MULTIPART_RESOLVER_BEAN_NAME 所决定)的 MultipartResolver 实例.
+	如果能够获得一个 MultipartResolver 的实例，DispatcherServlet 将调用 MultipartResolver 的 isMultipart(request) 方法检查当前 Web 请求是否为 multipart类型
+	如果是，DispatcherServlet 将调用 MultipartResolver 的 resolveMultipart(request) 方法，对原始 request 进行装饰
+	并返回一个 MultipartHttpServletRequest 供后继处理流程使用(最初的 HttpServletRequest 被偷梁换柱成了 MultipartHttpServletRequest)
+	否则，直接返回最初的 HttpServletRequest
+	 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8" />
+		<!-- <property name="resolveLazily" value="true" /> -->
+		<property name="maxUploadSize" value="20000000" />
+	</bean>
+	 
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">error</prop>
+			</props>
+		</property>
+	</bean>
+	 
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+		</property>
+	</bean>
+	
+	<bean  class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" /> 
+	
+	<!-- View 配置 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/view/"/>
+        <property name="suffix" value=".html"/>
+    </bean>
+	
+	<mvc:interceptors>
+		<bean class="com.ad.filter.ResponseInterceptor"/>
+		<bean class="com.ad.filter.LoginInterceptor">
+			<property name="excluded">
+			<list>
+				<value>/login</value>
+			</list>
+		</property>
+		</bean>
+	</mvc:interceptors>
+	
+</beans>

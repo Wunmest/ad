@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+      http://www.springframework.org/schema/aop
+      http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"  default-autowire="byName">
+
+	<context:component-scan base-package="com.ad.dao, com.ad.service" />
+	
+	<!-- 
+		controller is singleton, 即使 xResponse 是 prototype 也无济于事.
+		如果把 controller 改成 prototype, xRespones 好使了
+		但是 请求完成一次 controller 就销毁一次, 会出现莫名其妙的问题.
+		比方说 fileController 中生成的二维码过一会儿消失了. fuck!!
+		
+		貌似不是上面说的问题, 有时间看一下
+		
+		错怪你了, 是 eclipse 重新部署的原因. 新生成的二维码在 tomcat 目录, 不在工作空间中,
+		这样的话  重新部署就会删除二维码.
+	 -->
+	 <!-- 
+	<bean id="xResponse" class="com.ad.domain.XResponse" scope="prototype">
+		<constructor-arg type="int" value="0"></constructor-arg>
+		<constructor-arg type="String" value="成功"></constructor-arg>
+	</bean>
+	 -->
+</beans>
